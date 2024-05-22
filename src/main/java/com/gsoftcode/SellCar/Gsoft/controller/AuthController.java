@@ -17,10 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -49,7 +46,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
     }
 
-    PostMapping("/login")
+   @GetMapping("/login")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest){
         try{
             authenticationManager.authenticate(
@@ -59,7 +56,7 @@ public class AuthController {
 
 
     }catch (BadCredentialsException e){
-            throw new BadCredentialsException("Login ou Mot de passe sont incorrectes")
+            throw new BadCredentialsException("Login ou Mot de passe sont incorrectes");
         }
 
 final UserDetails userDetails = userService.userDetailService().loadUserByUsername(authenticationRequest.getEmail());
@@ -74,4 +71,4 @@ final UserDetails userDetails = userService.userDetailService().loadUserByUserna
         return response;
 
     }
-    }
+}

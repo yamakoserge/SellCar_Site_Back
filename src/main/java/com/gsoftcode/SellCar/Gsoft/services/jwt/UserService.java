@@ -7,4 +7,5 @@ public interface UserService {
 
    UserDetailsService userDetailService();
 
+   UserDetailsService userDetailsService();
 }
