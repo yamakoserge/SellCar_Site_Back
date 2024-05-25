@@ -46,8 +46,8 @@ public class WebSecurityConfiguration {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-    private AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
         return configuration.getAuthenticationManager();
     }
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl {
 
     private final UserRepository userRepository;
 
-    @Override
+    /*@Override
     public UserDetailsService userDetailService() {
         return new UserDetailsService() {
             @Override
@@ -22,5 +22,5 @@ public class UserServiceImpl implements UserService{
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
-    }
+    }*/
 }
