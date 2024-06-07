@@ -9,7 +9,7 @@ import com.gsoftcode.SellCar.Gsoft.repository.UserRepository;
 import com.gsoftcode.SellCar.Gsoft.services.auth.AuthService;
 import com.gsoftcode.SellCar.Gsoft.services.jwt.UserService;
 import com.gsoftcode.SellCar.Gsoft.utils.JWTUtil;
-import io.jsonwebtoken.Jwt;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
@@ -47,7 +46,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
     }
 
-   @GetMapping("/login")
+   @PostMapping("/login")
     public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest){
         try{
             authenticationManager.authenticate(

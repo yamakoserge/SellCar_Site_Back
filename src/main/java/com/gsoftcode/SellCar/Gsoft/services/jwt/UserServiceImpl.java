@@ -1,5 +1,6 @@
 package com.gsoftcode.SellCar.Gsoft.services.jwt;
 
+
 import com.gsoftcode.SellCar.Gsoft.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
-    /*@Override
+    @Override
     public UserDetailsService userDetailService() {
         return new UserDetailsService() {
             @Override
@@ -22,5 +23,5 @@ public class UserServiceImpl {
                         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
             }
         };
-    }*/
+    }
 }
