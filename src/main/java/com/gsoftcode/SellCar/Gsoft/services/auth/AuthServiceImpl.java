@@ -5,6 +5,7 @@ import com.gsoftcode.SellCar.Gsoft.dtos.UserDTO;
 import com.gsoftcode.SellCar.Gsoft.entities.User;
 import com.gsoftcode.SellCar.Gsoft.enums.UserRole;
 import com.gsoftcode.SellCar.Gsoft.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
 
+    @PostConstruct
     public void createAnAdminAccount(){
         Optional<User> optionalAdmin = userRepository.findByUserRole(UserRole.ADMIN);
         if (optionalAdmin.isEmpty()){

@@ -33,6 +33,7 @@ public class JWTUtil {
     }
 
     public String extractUsername(String token) {
+
         return extractClaims(token, Claims::getSubject);
     }
 
@@ -41,6 +42,7 @@ public class JWTUtil {
     }
 
     private boolean isTokenExpired(String token) {
+
         return extractExpiration(token).before(new Date());
     }
 
@@ -52,11 +54,12 @@ public class JWTUtil {
     private String generateToken(Map<String, Object> extractClaims, UserDetails userDetails) {
         return Jwts.builder().setClaims(extractClaims).setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000*60*60*24))
                 .signWith(getsigningkey(), SignatureAlgorithm.HS256).compact();
     }
 
     public String generateToken(UserDetails userDetails) {
+
         return generateToken(new HashMap<>(), userDetails);
     }
 }

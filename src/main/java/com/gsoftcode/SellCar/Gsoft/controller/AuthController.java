@@ -59,7 +59,7 @@ public class AuthController {
             throw new BadCredentialsException("Login ou Mot de passe sont incorrectes");
         }
 
-final UserDetails userDetails = userService.userDetailService().loadUserByUsername(authenticationRequest.getEmail());
+    final UserDetails userDetails = userService.userDetailService().loadUserByUsername(authenticationRequest.getEmail());
         Optional<User> optionalUser = userRepository.findFirstByEmail(authenticationRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetails);
         AuthenticationResponse response = new AuthenticationResponse();
