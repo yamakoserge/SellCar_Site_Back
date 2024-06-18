@@ -10,4 +10,6 @@ public interface CustomerService {
     boolean createCar(CarDTO carDTO) throws IOException;
 
     List<CarDTO> getAllCars();
+
+    CarDTO getCarById(Long id);
 }

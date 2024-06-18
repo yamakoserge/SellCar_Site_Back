@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,4 +21,13 @@ public class AdminServiceImpl implements AdminService{
         return carRepository.findAll().stream().map(Car::getCarDTO).collect(Collectors.toList());
 
     }
+    @Override
+    public CarDTO getCarById(Long id) {
+        Optional<Car> optionalCar = carRepository.findById(id);
+        return optionalCar.map(Car::getCarDTO).orElse(null);
+    }
+
+
+
+
 }

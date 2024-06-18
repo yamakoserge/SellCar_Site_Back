@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface AdminService {
     List<CarDTO> getAllCars();
+
+    CarDTO getCarById(Long id);
 }
