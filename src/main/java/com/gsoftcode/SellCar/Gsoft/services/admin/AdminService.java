@@ -9,4 +9,7 @@ public interface AdminService {
     List<CarDTO> getAllCars();
 
     CarDTO getCarById(Long id);
+
+    void deleteCar(Long id);
+
 }

@@ -53,4 +53,9 @@ public class CustomerServiceImpl implements CustomerService{
         Optional<Car> optionalCar = carRepository.findById(id);
         return optionalCar.map(Car::getCarDTO).orElse(null);
     }
+
+    @Override
+    public void deleteCar(Long id) {
+        carRepository.deleteById(id);
+    }
 }
