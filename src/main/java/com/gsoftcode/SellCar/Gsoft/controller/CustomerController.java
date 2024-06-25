@@ -41,4 +41,10 @@ public class CustomerController {
         customerService.deleteCar(id);
         return ResponseEntity.ok(null);
     }
+    @PutMapping("/car/{id}")
+    public ResponseEntity<?> updateCar(@PathVariable Long id ,@ModelAttribute CarDTO carDTO) throws IOException {
+        boolean success = customerService.updateCar(id,carDTO);
+        if (success) return ResponseEntity.status(HttpStatus.OK).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
 }

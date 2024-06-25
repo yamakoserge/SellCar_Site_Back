@@ -8,6 +8,7 @@ import java.util.List;
 public interface CustomerService {
 
     boolean createCar(CarDTO carDTO) throws IOException;
+    boolean updateCar (Long id, CarDTO carDTO) throws IOException;
 
     List<CarDTO> getAllCars();
 
