@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -21,10 +20,18 @@ public class AdminController {
 
     @GetMapping("/cars")
     public ResponseEntity<List<CarDTO>> getAllCar(){
+
         return ResponseEntity.ok(adminService.getAllCars());
     }
 
+    @GetMapping("/car/{id}")
     public ResponseEntity<CarDTO> getCarById(@PathVariable Long id){
         return ResponseEntity.ok(adminService.getCarById(id));
+    }
+
+    @DeleteMapping("/car/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id){
+        adminService.deleteCar(id);
+        return ResponseEntity.ok(null);
     }
 }

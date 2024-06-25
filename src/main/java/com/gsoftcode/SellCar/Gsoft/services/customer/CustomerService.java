@@ -12,4 +12,6 @@ public interface CustomerService {
     List<CarDTO> getAllCars();
 
     CarDTO getCarById(Long id);
+
+    void deleteCar(Long id);
 }

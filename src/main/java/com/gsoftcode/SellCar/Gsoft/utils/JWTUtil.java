@@ -42,6 +42,7 @@ public class JWTUtil {
     }
 
     private Date extractExpiration(String token) {
+
         return extractClaims(token, Claims::getExpiration);
     }
 

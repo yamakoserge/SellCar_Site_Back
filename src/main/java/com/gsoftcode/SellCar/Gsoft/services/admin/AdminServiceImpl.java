@@ -27,7 +27,10 @@ public class AdminServiceImpl implements AdminService{
         return optionalCar.map(Car::getCarDTO).orElse(null);
     }
 
-
+    @Override
+    public void deleteCar(Long id) {
+        carRepository.deleteById(id);
+    }
 
 
 }

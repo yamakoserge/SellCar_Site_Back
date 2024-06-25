@@ -31,7 +31,14 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getAllCars());
     }
 
+    @GetMapping("/car/{id}")
     public ResponseEntity<CarDTO> getCarById(@PathVariable Long id){
         return ResponseEntity.ok(customerService.getCarById(id));
+    }
+
+    @DeleteMapping("/car/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id){
+        customerService.deleteCar(id);
+        return ResponseEntity.ok(null);
     }
 }
