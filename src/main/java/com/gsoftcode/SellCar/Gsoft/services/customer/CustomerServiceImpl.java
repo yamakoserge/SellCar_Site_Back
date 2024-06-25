@@ -56,6 +56,10 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public void deleteCar(Long id) {
+
          carRepository.deleteById(id);
+
+        carRepository.deleteById(id);
+
     }
 }
