@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.controller;
 
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
+import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.services.customer.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -46,5 +49,10 @@ public class CustomerController {
         boolean success = customerService.updateCar(id,carDTO);
         if (success) return ResponseEntity.status(HttpStatus.OK).build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+    }
+
+    @PostMapping("/car/search")
+    public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchCarDTO searchCarDTO){
+        return ResponseEntity.ok(customerService.searchCar(searchCarDTO));
     }
 }

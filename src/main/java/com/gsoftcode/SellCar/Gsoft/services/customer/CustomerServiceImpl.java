@@ -2,11 +2,14 @@ package com.gsoftcode.SellCar.Gsoft.services.customer;
 
 
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
+import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
 import com.gsoftcode.SellCar.Gsoft.entities.User;
 import com.gsoftcode.SellCar.Gsoft.repository.CarRepository;
 import com.gsoftcode.SellCar.Gsoft.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 
@@ -63,6 +66,8 @@ public class CustomerServiceImpl implements CustomerService{
 
     }
 
+
+
     @Override
     public boolean updateCar(Long id, CarDTO carDTO) throws IOException {
     Optional<Car> optionalCar = carRepository.findById(id);
@@ -81,5 +86,23 @@ public class CustomerServiceImpl implements CustomerService{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<CarDTO> searchCar(SearchCarDTO searchCarDTO) {
+       Car car = new Car();
+
+       car.setMarque(searchCarDTO.getMarque());
+       car.setColor(searchCarDTO.getColor());
+       car.setType(searchCarDTO.getType());
+       car.setTransmission(searchCarDTO.getTransmission());
+        ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
+                .withMatcher("Marque", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("Type", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("Color", ExampleMatcher.GenericPropertyMatchers.contains())
+                .withMatcher("Transmission", ExampleMatcher.GenericPropertyMatchers.contains());
+        Example<Car> carExample = Example.of(car,exampleMatcher);
+        List<Car> cars = carRepository.findAll(carExample);
+        return cars.stream().map(Car::getCarDTO).collect(Collectors.toList());
     }
 }

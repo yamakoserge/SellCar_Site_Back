@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.controller;
 
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
+import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.services.admin.AdminService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,10 @@ public class AdminController {
     public ResponseEntity<Void> deleteCar(@PathVariable Long id){
         adminService.deleteCar(id);
         return ResponseEntity.ok(null);
+    }
+
+    @PostMapping("/car/search")
+    public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchCarDTO searchCarDTO){
+        return ResponseEntity.ok(adminService.searchCar(searchCarDTO));
     }
 }

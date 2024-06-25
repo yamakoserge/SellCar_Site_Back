@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.services.admin;
 
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
+import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
 
 import java.util.List;
@@ -12,4 +13,5 @@ public interface AdminService {
 
     void deleteCar(Long id);
 
+    List<CarDTO> searchCar(SearchCarDTO searchCarDTO);
 }

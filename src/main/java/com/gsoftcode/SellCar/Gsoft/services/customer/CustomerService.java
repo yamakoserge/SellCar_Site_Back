@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.services.customer;
 
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
+import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,4 +16,6 @@ public interface CustomerService {
     CarDTO getCarById(Long id);
 
     void deleteCar(Long id);
+
+    List<CarDTO> searchCar(SearchCarDTO searchCarDTO);
 }
