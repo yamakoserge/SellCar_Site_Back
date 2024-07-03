@@ -1,10 +1,14 @@
 package com.gsoftcode.SellCar.Gsoft.services.customer;
 
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
+import com.gsoftcode.SellCar.Gsoft.entities.Bid;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
 import com.gsoftcode.SellCar.Gsoft.entities.User;
+import com.gsoftcode.SellCar.Gsoft.enums.BidStatus;
+import com.gsoftcode.SellCar.Gsoft.repository.BidRepository;
 import com.gsoftcode.SellCar.Gsoft.repository.CarRepository;
 import com.gsoftcode.SellCar.Gsoft.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +29,9 @@ public class CustomerServiceImpl implements CustomerService{
     private final UserRepository userRepository;
 
     private final CarRepository carRepository;
+
+    private final BidRepository bidRepository;
+
 @Override
     public boolean createCar(CarDTO carDTO) throws IOException {
         Optional<User> optionalUser = userRepository.findById(carDTO.getId());
@@ -105,4 +112,27 @@ public class CustomerServiceImpl implements CustomerService{
         List<Car> cars = carRepository.findAll(carExample);
         return cars.stream().map(Car::getCarDTO).collect(Collectors.toList());
     }
+
+    @Override
+    public List<CarDTO> getMyCars(Long userId) {
+        return carRepository.findAllByUserId(userId).stream().map(Car::getCarDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean bidACar(BidDTO bidDTO) {
+    Optional<Car> optionalCar = carRepository.findById(bidDTO.getCarId());
+    Optional<User> optionalUser = userRepository.findById(bidDTO.getUserId());
+    if (optionalCar.isPresent() && optionalUser.isPresent()){
+            Bid bid = new Bid();
+            bid.setUser(optionalUser.get());
+            bid.setCar(optionalCar.get());
+            bid.setPrice(bidDTO.getPrice());
+            bid.setBidStatus(BidStatus.PENDING);
+            bidRepository.save(bid);
+            return true;
+       }
+        return false;
+    }
+
+
 }

@@ -14,4 +14,6 @@ public interface AdminService {
     void deleteCar(Long id);
 
     List<CarDTO> searchCar(SearchCarDTO searchCarDTO);
+
+    List<CarDTO> getMyCar(Long userId);
 }

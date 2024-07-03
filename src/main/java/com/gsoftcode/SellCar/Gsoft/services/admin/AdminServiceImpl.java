@@ -53,4 +53,10 @@ public class AdminServiceImpl implements AdminService{
         return cars.stream().map(Car::getCarDTO).collect(Collectors.toList());
     }
 
+    @Override
+    public List<CarDTO> getMyCar(Long userId) {
+        return carRepository.findAllByUserId(userId).stream().map(Car::getCarDTO).collect(Collectors.toList());
+
+    }
+
 }

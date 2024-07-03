@@ -1,5 +1,6 @@
 package com.gsoftcode.SellCar.Gsoft.services.customer;
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 
@@ -18,4 +19,8 @@ public interface CustomerService {
     void deleteCar(Long id);
 
     List<CarDTO> searchCar(SearchCarDTO searchCarDTO);
+
+    List<CarDTO> getMyCars(Long userId);
+
+    boolean bidACar(BidDTO bidDTO);
 }

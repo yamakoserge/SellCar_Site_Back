@@ -1,5 +1,6 @@
 package com.gsoftcode.SellCar.Gsoft.controller;
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.services.customer.CustomerService;
@@ -54,5 +55,18 @@ public class CustomerController {
     @PostMapping("/car/search")
     public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchCarDTO searchCarDTO){
         return ResponseEntity.ok(customerService.searchCar(searchCarDTO));
+    }
+
+    @GetMapping("/my-cars/{userId}")
+    public ResponseEntity<List<CarDTO>> getMyCars(@PathVariable Long userId){
+
+        return ResponseEntity.ok(customerService.getMyCars(userId));
+    }
+
+    @PostMapping("/car/bid")
+    public ResponseEntity<?> bidACar(@RequestBody BidDTO bidDTO) throws IOException {
+        boolean success = customerService.bidACar(bidDTO);
+        if (success) return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }
