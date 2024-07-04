@@ -15,4 +15,13 @@ public class BidDTO {
     private Long userId;
 
     private Long carId;
+
+    private String username;
+
+    private String carMarque;
+
+    private String email;
+
+    private String sellerName;
+
 }

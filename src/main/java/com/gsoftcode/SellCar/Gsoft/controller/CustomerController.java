@@ -59,7 +59,6 @@ public class CustomerController {
 
     @GetMapping("/my-cars/{userId}")
     public ResponseEntity<List<CarDTO>> getMyCars(@PathVariable Long userId){
-
         return ResponseEntity.ok(customerService.getMyCars(userId));
     }
 
@@ -69,4 +68,10 @@ public class CustomerController {
         if (success) return ResponseEntity.status(HttpStatus.CREATED).build();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
+
+    @GetMapping("/car/bids/{userId}")
+    public ResponseEntity<List<BidDTO>> getBidsByUserID(@PathVariable Long userId){
+        return ResponseEntity.ok(customerService.getBidsByUserId(userId));
+    }
+
 }

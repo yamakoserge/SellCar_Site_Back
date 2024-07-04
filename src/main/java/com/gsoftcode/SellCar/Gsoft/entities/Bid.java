@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.enums.BidStatus;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -30,5 +31,31 @@ public class Bid {
     private Car car;
 
     private BidStatus bidStatus;
+
+    public BidDTO getBioDTO(){
+        BidDTO bidDTO = new BidDTO();
+
+        bidDTO.setId(id);
+
+        bidDTO.setPrice(price);
+
+        bidDTO.setCarId(car.getId());
+
+        bidDTO.setCarId(car.getId());
+
+        bidDTO.setCarMarque(car.getMarque());
+
+        bidDTO.setBidStatus(bidStatus);
+
+        bidDTO.setEmail(user.getEmail());
+
+        bidDTO.setUsername(user.getName());
+
+       // bidDTO.setUsername(car.getUser().getName());
+
+        bidDTO.setSellerName(car.getUser().getName());
+
+        return bidDTO;
+    }
 
 }

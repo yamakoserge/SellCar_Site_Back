@@ -23,4 +23,8 @@ public interface CustomerService {
     List<CarDTO> getMyCars(Long userId);
 
     boolean bidACar(BidDTO bidDTO);
+
+    List<BidDTO> getBidsByUserId(Long userId);
+
+
 }
