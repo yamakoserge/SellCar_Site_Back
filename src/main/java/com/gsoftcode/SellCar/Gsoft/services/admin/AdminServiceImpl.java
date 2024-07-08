@@ -1,8 +1,11 @@
 package com.gsoftcode.SellCar.Gsoft.services.admin;
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
+import com.gsoftcode.SellCar.Gsoft.entities.Bid;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
+import com.gsoftcode.SellCar.Gsoft.repository.BidRepository;
 import com.gsoftcode.SellCar.Gsoft.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Example;
@@ -18,6 +21,8 @@ import java.util.stream.Collectors;
 public class AdminServiceImpl implements AdminService{
 
     private final CarRepository carRepository;
+
+    private final BidRepository bidRepository;
 
     @Override
     public List<CarDTO> getAllCars() {
@@ -57,6 +62,11 @@ public class AdminServiceImpl implements AdminService{
     public List<CarDTO> getMyCar(Long userId) {
         return carRepository.findAllByUserId(userId).stream().map(Car::getCarDTO).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public List<BidDTO> getBids() {
+        return bidRepository.findAll().stream().map(Bid::getBioDTO).collect(Collectors.toList());
     }
 
 }

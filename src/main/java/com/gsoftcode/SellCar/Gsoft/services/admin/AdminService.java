@@ -1,5 +1,6 @@
 package com.gsoftcode.SellCar.Gsoft.services.admin;
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
@@ -16,4 +17,6 @@ public interface AdminService {
     List<CarDTO> searchCar(SearchCarDTO searchCarDTO);
 
     List<CarDTO> getMyCar(Long userId);
+
+    List<BidDTO> getBids();
 }

@@ -1,5 +1,6 @@
 package com.gsoftcode.SellCar.Gsoft.controller;
 
+import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.services.admin.AdminService;
@@ -39,5 +40,10 @@ public class AdminController {
     @PostMapping("/car/search")
     public ResponseEntity<List<CarDTO>> searchCar(@RequestBody SearchCarDTO searchCarDTO){
         return ResponseEntity.ok(adminService.searchCar(searchCarDTO));
+    }
+
+    @GetMapping("/car/bids")
+    public ResponseEntity<List<BidDTO>> getBids(){
+        return ResponseEntity.ok(adminService.getBids());
     }
 }
