@@ -18,6 +18,8 @@ public class BidDTO {
 
     private String username;
 
+    private String carName;
+
     private String carMarque;
 
     private String email;

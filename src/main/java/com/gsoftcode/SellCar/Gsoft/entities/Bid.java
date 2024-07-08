@@ -41,7 +41,7 @@ public class Bid {
 
         bidDTO.setCarId(car.getId());
 
-        bidDTO.setCarId(car.getId());
+        bidDTO.setCarName(car.getName());
 
         bidDTO.setCarMarque(car.getMarque());
 
@@ -50,8 +50,6 @@ public class Bid {
         bidDTO.setEmail(user.getEmail());
 
         bidDTO.setUsername(user.getName());
-
-       // bidDTO.setUsername(car.getUser().getName());
 
         bidDTO.setSellerName(car.getUser().getName());
 
