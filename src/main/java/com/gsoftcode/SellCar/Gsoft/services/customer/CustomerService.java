@@ -26,5 +26,7 @@ public interface CustomerService {
 
     List<BidDTO> getBidsByUserId(Long userId);
 
+    List<BidDTO> getBidsByCarId(Long carId);
+
 
 }
