@@ -86,4 +86,10 @@ public class CustomerController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/car/analytics/{userId}")
+    public ResponseEntity<?> getAnalytics(@PathVariable Long userId){
+        return ResponseEntity.ok(customerService.getAnalytics(userId));
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.services.customer;
 
 
+import com.gsoftcode.SellCar.Gsoft.dtos.AnalyticsDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.BidDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
@@ -165,4 +166,13 @@ public class CustomerServiceImpl implements CustomerService{
         return false;
 
 
+}
+
+    @Override
+    public AnalyticsDTO getAnalytics(Long userId) {
+    AnalyticsDTO analyticsDTO= new AnalyticsDTO();
+    analyticsDTO.setTotalCars(carRepository.countByUserId(userId));
+    analyticsDTO.setSoldeCars(carRepository.countByUserIdAndSoldTrue(userId));
+    return analyticsDTO;
+    }
 }
