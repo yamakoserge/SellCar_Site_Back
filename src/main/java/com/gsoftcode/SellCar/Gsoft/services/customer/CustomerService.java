@@ -28,5 +28,7 @@ public interface CustomerService {
 
     List<BidDTO> getBidsByCarId(Long carId);
 
+    Boolean changeBidStatus(Long bidId, String status);
+
 
 }

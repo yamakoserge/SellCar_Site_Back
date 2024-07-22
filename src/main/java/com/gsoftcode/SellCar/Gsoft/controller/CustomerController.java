@@ -79,4 +79,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getBidsByCarId(carId));
     }
 
+    @GetMapping("/car/bid/{bidId}/{status}")
+    public ResponseEntity<Void> changeBidStatus(@PathVariable Long bidId, @PathVariable String status){
+        boolean success =  customerService.changeBidStatus(bidId, status);
+        if (success) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
+    }
+
 }
