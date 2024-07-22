@@ -5,6 +5,7 @@ import com.gsoftcode.SellCar.Gsoft.dtos.CarDTO;
 import com.gsoftcode.SellCar.Gsoft.dtos.SearchCarDTO;
 import com.gsoftcode.SellCar.Gsoft.entities.Bid;
 import com.gsoftcode.SellCar.Gsoft.entities.Car;
+import com.gsoftcode.SellCar.Gsoft.enums.BidStatus;
 import com.gsoftcode.SellCar.Gsoft.repository.BidRepository;
 import com.gsoftcode.SellCar.Gsoft.repository.CarRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -67,6 +69,21 @@ public class AdminServiceImpl implements AdminService{
     @Override
     public List<BidDTO> getBids() {
         return bidRepository.findAll().stream().map(Bid::getBioDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean changeBidsStatus(Long bidId, String status) {
+       Optional<Bid> optionalBid = bidRepository.findById(bidId);
+       if (optionalBid.isPresent()){
+         Bid existingBid = optionalBid.get();
+         if (Objects.equals(status,"Approve"))
+             existingBid.setBidStatus(BidStatus.APPROVED);
+         else
+             existingBid.setBidStatus(BidStatus.REJECTED);
+         bidRepository.save(existingBid);
+         return true;
+       }
+        return false;
     }
 
 }

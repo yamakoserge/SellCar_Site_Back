@@ -46,4 +46,19 @@ public class AdminController {
     public ResponseEntity<List<BidDTO>> getBids(){
         return ResponseEntity.ok(adminService.getBids());
     }
+
+
+    @GetMapping("/car/bid/{bidId}/{status}")
+    public ResponseEntity<Void> changeBidStatus(@PathVariable Long bidId, @PathVariable String status){
+        boolean success =  adminService.changeBidsStatus(bidId, status);
+        if (success) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
+    }
+
+
+
+
+
+
+
 }

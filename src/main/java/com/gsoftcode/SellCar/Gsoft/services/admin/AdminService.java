@@ -19,4 +19,7 @@ public interface AdminService {
     List<CarDTO> getMyCar(Long userId);
 
     List<BidDTO> getBids();
+
+   boolean changeBidsStatus(Long bidId, String status);
+
 }
