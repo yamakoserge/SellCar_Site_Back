@@ -172,7 +172,7 @@ public class CustomerServiceImpl implements CustomerService{
     public AnalyticsDTO getAnalytics(Long userId) {
     AnalyticsDTO analyticsDTO= new AnalyticsDTO();
     analyticsDTO.setTotalCars(carRepository.countByUserId(userId));
-    analyticsDTO.setSoldeCars(carRepository.countByUserIdAndSoldTrue(userId));
+    analyticsDTO.setSoldCars(carRepository.countByUserIdAndSoldTrue(userId));
     return analyticsDTO;
     }
 }

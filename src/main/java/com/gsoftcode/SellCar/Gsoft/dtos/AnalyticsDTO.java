@@ -7,5 +7,5 @@ public class AnalyticsDTO {
 
     private Long totalCars;
 
-    private Long soldeCars;
+    private Long soldCars;
 }
