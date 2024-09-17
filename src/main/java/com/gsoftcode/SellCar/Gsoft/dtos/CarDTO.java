@@ -1,6 +1,7 @@
 package com.gsoftcode.SellCar.Gsoft.dtos;
 
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
@@ -20,7 +21,10 @@ public class CarDTO {
 
     private String color;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date year;
+
+    private Date model;
 
     private Boolean sold;
 

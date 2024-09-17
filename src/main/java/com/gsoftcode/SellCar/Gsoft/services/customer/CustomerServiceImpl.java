@@ -46,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService{
             car.setColor(carDTO.getColor());
             car.setTransmission(carDTO.getTransmission());
             car.setSold(false);
-            car.setYear(carDTO.getYear());
+            car.setYear(carDTO.getModel());
             car.setImg(carDTO.getImg().getBytes());
             car.setUser(optionalUser.get());
             carRepository.save(car);
@@ -71,7 +71,7 @@ public class CustomerServiceImpl implements CustomerService{
 
          carRepository.deleteById(id);
 
-        carRepository.deleteById(id);
+         carRepository.deleteById(id);
 
     }
 

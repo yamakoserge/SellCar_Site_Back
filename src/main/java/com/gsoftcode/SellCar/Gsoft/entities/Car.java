@@ -14,14 +14,13 @@ public class Car {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
     private String marque;
+
+    private String name;
 
     private String type;
 
     private String transmission;
-
 
     private String color;
 
