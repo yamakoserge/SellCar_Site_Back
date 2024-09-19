@@ -88,7 +88,7 @@ public class CustomerServiceImpl implements CustomerService{
             car.setDescription(carDTO.getDescription());
             car.setColor(carDTO.getColor());
             car.setTransmission(carDTO.getTransmission());
-            car.setYear(carDTO.getYear());
+            car.setYear(carDTO.getModel());
             if (carDTO.getImg() !=null)
                  car.setImg(carDTO.getImg().getBytes());
             carRepository.save(car);
