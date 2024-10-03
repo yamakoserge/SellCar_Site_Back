@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class CustomerServiceImpl implements CustomerService{
+public class CustomerServiceImpl implements CustomerService {
 
     private final UserRepository userRepository;
 
@@ -34,10 +34,10 @@ public class CustomerServiceImpl implements CustomerService{
 
     private final BidRepository bidRepository;
 
-@Override
+    @Override
     public boolean createCar(CarDTO carDTO) throws IOException {
         Optional<User> optionalUser = userRepository.findById(carDTO.getId());
-        if (optionalUser.isPresent()){
+        if (optionalUser.isPresent()) {
             Car car = new Car();
             car.setName(carDTO.getName());
             car.setMarque(carDTO.getMarque());
@@ -69,18 +69,17 @@ public class CustomerServiceImpl implements CustomerService{
     @Override
     public void deleteCar(Long id) {
 
-         carRepository.deleteById(id);
+        carRepository.deleteById(id);
 
-         carRepository.deleteById(id);
+        carRepository.deleteById(id);
 
     }
 
 
-
     @Override
     public boolean updateCar(Long id, CarDTO carDTO) throws IOException {
-    Optional<Car> optionalCar = carRepository.findById(id);
-        if ((optionalCar.isPresent())){
+        Optional<Car> optionalCar = carRepository.findById(id);
+        if ((optionalCar.isPresent())) {
             Car car = optionalCar.get();
             car.setName(carDTO.getName());
             car.setMarque(carDTO.getMarque());
@@ -89,8 +88,8 @@ public class CustomerServiceImpl implements CustomerService{
             car.setColor(carDTO.getColor());
             car.setTransmission(carDTO.getTransmission());
             car.setYear(carDTO.getModel());
-            if (carDTO.getImg() !=null)
-                 car.setImg(carDTO.getImg().getBytes());
+            if (carDTO.getImg() != null)
+                car.setImg(carDTO.getImg().getBytes());
             carRepository.save(car);
             return true;
         }
@@ -99,18 +98,18 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public List<CarDTO> searchCar(SearchCarDTO searchCarDTO) {
-       Car car = new Car();
+        Car car = new Car();
 
-       car.setMarque(searchCarDTO.getMarque());
-       car.setColor(searchCarDTO.getColor());
-       car.setType(searchCarDTO.getType());
-       car.setTransmission(searchCarDTO.getTransmission());
+        car.setMarque(searchCarDTO.getMarque());
+        car.setColor(searchCarDTO.getColor());
+        car.setType(searchCarDTO.getType());
+        car.setTransmission(searchCarDTO.getTransmission());
         ExampleMatcher exampleMatcher = ExampleMatcher.matchingAll()
                 .withMatcher("Marque", ExampleMatcher.GenericPropertyMatchers.contains())
                 .withMatcher("Type", ExampleMatcher.GenericPropertyMatchers.contains())
                 .withMatcher("Color", ExampleMatcher.GenericPropertyMatchers.contains())
                 .withMatcher("Transmission", ExampleMatcher.GenericPropertyMatchers.contains());
-        Example<Car> carExample = Example.of(car,exampleMatcher);
+        Example<Car> carExample = Example.of(car, exampleMatcher);
         List<Car> cars = carRepository.findAll(carExample);
         return cars.stream().map(Car::getCarDTO).collect(Collectors.toList());
     }
@@ -122,9 +121,9 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public boolean bidACar(BidDTO bidDTO) {
-    Optional<Car> optionalCar = carRepository.findById(bidDTO.getCarId());
-    Optional<User> optionalUser = userRepository.findById(bidDTO.getUserId());
-    if (optionalCar.isPresent() && optionalUser.isPresent()){
+        Optional<Car> optionalCar = carRepository.findById(bidDTO.getCarId());
+        Optional<User> optionalUser = userRepository.findById(bidDTO.getUserId());
+        if (optionalCar.isPresent() && optionalUser.isPresent()) {
             Bid bid = new Bid();
             bid.setUser(optionalUser.get());
             bid.setCar(optionalCar.get());
@@ -132,7 +131,7 @@ public class CustomerServiceImpl implements CustomerService{
             bid.setBidStatus(BidStatus.PENDING);
             bidRepository.save(bid);
             return true;
-       }
+        }
         return false;
     }
 
@@ -151,14 +150,17 @@ public class CustomerServiceImpl implements CustomerService{
     public Boolean changeBidStatus(Long bidId, String status) {
 
         Optional<Bid> optionalBid = bidRepository.findById(bidId);
-        if (optionalBid.isPresent()){
+        if (optionalBid.isPresent()) {
             Bid existingBid = optionalBid.get();
-            if (existingBid.getCar().getSold()){
+            Car car = optionalBid.get().getCar();
+            if (existingBid.getCar().getSold()) {
                 return false;
             }
-            if (Objects.equals(status,"Approve"))
+            if (Objects.equals(status, "Approve")){
                 existingBid.setBidStatus(BidStatus.APPROVED);
-            else
+                car.setSold(true);
+        }
+        else
                 existingBid.setBidStatus(BidStatus.REJECTED);
             bidRepository.save(existingBid);
             return true;
@@ -166,13 +168,13 @@ public class CustomerServiceImpl implements CustomerService{
         return false;
 
 
-}
+    }
 
     @Override
     public AnalyticsDTO getAnalytics(Long userId) {
-    AnalyticsDTO analyticsDTO= new AnalyticsDTO();
-    analyticsDTO.setTotalCars(carRepository.countByUserId(userId));
-    analyticsDTO.setSoldCars(carRepository.countByUserIdAndSoldTrue(userId));
-    return analyticsDTO;
+        AnalyticsDTO analyticsDTO = new AnalyticsDTO();
+        analyticsDTO.setTotalCars(carRepository.countByUserId(userId));
+        analyticsDTO.setSoldCars(carRepository.countByUserIdAndSoldTrue(userId));
+        return analyticsDTO;
     }
 }
